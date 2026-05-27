@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -111,9 +112,9 @@ func CreateOrderHandler(w http.ResponseWriter, rInterval *http.Request) {
 		subtotal := item.UnitPrice * item.Quantity
 		itemNo := i + 1
 		query := `INSERT INTO order_items (order_no, terminal_no, order_status, item_no, menu_name, unit_price, quantity, subtotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-		
+
 		log.Printf("[DB Insert Item %d] OrderNo: %s, Item: %s, Qty: %d, Subtotal: %d", itemNo, orderNo, item.MenuName, item.Quantity, subtotal)
-		
+
 		_, err := tx.Exec(query, orderNo, req.TerminalNo, initialStatus, itemNo, item.MenuName, item.UnitPrice, item.Quantity, subtotal)
 		if err != nil {
 			tx.Rollback()

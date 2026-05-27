@@ -33,7 +33,7 @@ func main() {
 
 	// Print startup message to terminal (stdout)
 	fmt.Println("サーバー起動: http://localhost:8080")
-	
+
 	if err := http.ListenAndServe(":8080", mux); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}

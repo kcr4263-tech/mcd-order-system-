@@ -46,7 +46,7 @@ func CloseDB() {
 func GenerateOrderNo() (string, error) {
 	now := time.Now()
 	dateStr := now.Format("0102") // MMDD
-	
+
 	// Query the count of unique order numbers generated today to establish the next index
 	query := `SELECT COUNT(DISTINCT order_no) FROM order_items WHERE order_no LIKE ?`
 	var count int
